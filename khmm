@@ -1,0 +1,69 @@
+import os
+
+def create_file(filename):
+    if not os.path.exists(filename):
+        with open(filename, 'w') as file:
+            print(f"Файл '{filename}' создан.")
+    else:
+        print(f"Файл '{filename}' уже существует.")
+
+def open_file(filename):
+    if os.path.exists(filename):
+        with open(filename, 'r') as file:
+            content = file.read()
+            print(f"Содержимое файла '{filename}':")
+            print(content)
+    else:
+        print(f"Файл '{filename}' не существует.")
+
+def edit_file(filename):
+    if os.path.exists(filename):
+        with open(filename, 'a') as file:
+            new_content = input("Введите новое содержимое: ")
+            file.write(new_content)
+            print(f"Файл '{filename}' успешно отредактирован.")
+    else:
+        print(f"Файл '{filename}' не существует.")
+
+def save_file(filename):
+    if os.path.exists(filename):
+        with open(filename, 'r') as file:
+            content = file.read()
+            new_filename = input("Введите имя файла для сохранения: ")
+            with open(new_filename, 'w') as new_file:
+                new_file.write(content)
+                print(f"Файл сохранен как '{new_filename}'.")
+    else:
+        print(f"Файл '{filename}' не существует.")
+
+while True:
+    print("Текстовый редактор")
+    print("1. Создать файл")
+    print("2. Открыть файл")
+    print("3. Редактировать файл")
+    print("4. Сохранить файл")
+    print("5. Выйти")
+
+    choice = input("Выберите действие: ")
+
+    if choice == "1":
+        filename = input("Введите имя файла для создания: ")
+        create_file(filename)
+
+    elif choice == "2":
+        filename = input("Введите имя файла для открытия: ")
+        open_file(filename)
+
+    elif choice == "3":
+        filename = input("Введите имя файла для редактирования: ")
+        edit_file(filename)
+
+    elif choice == "4":
+        filename = input("Введите имя файла для сохранения: ")
+        save_file(filename)
+
+    elif choice == "5":
+        break
+
+    else:
+        print("Неверный выбор. Пожалуйста, выберите снова.")
